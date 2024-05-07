@@ -1,16 +1,17 @@
 
-# Drawing Classifier 🖍
+# SketchSense - A Drawing Classifier 🖍
 
 Welcome to the Drawing Classifier ML project! This repository contains a machine learning model designed to classify sketches into predefined categories. It's a perfect tool for educational purposes, learning how different clasification algorithms work.
 
 ## Classification Algos used 🗄
 
-Linear SVC (Support Vector Machine)
-K Neighbours Classifier
-Logistic Regression
-Decision Tree Classifier
-Random Forest Classifier
-Gaussian Naive Bayes
+- Linear SVC (Support Vector Machine)
+- K Neighbours Classifier
+- Logistic Regression
+- Decision Tree Classifier
+- Random Forest Classifier
+- Gaussian Naive Bayes
+- Multi-layer Perceptron Classifier
 
 ## Features ✨
 

@@ -18,6 +18,7 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
+from sklearn.neural_network import MLPClassifier
 
 
 from sys import platform
@@ -87,7 +88,7 @@ class DrawingClassifier:
         WHITE = (255, 255, 255)
 
         self.root = Tk()
-        self.root.title(f"Drawing Classifier - {self.proj_name}")
+        self.root.title(f"SketchSense - {self.proj_name}")
 
         self.canvas = Canvas(self.root, width=WIDTH-10, height=HEIGHT-10, bg=appearence)
         self.canvas.pack(expand=YES, fill=BOTH)
@@ -225,7 +226,7 @@ class DrawingClassifier:
             tkinter.messagebox.showinfo("Drawing Classifier", f"The drawing is probably a {self.class3}", parent=self.root)
 
     def rotate_model(self):
-        if isinstance(self.clf, LinearSVC):
+        if isinstance(self.clf, MLPClassifier):
             self.clf = KNeighborsClassifier()
         elif isinstance(self.clf, KNeighborsClassifier):
             self.clf = LogisticRegression()
@@ -237,6 +238,8 @@ class DrawingClassifier:
             self.clf = GaussianNB()
         elif isinstance(self.clf, GaussianNB):
             self.clf = LinearSVC()
+        elif isinstance(self.clf, LinearSVC):
+            self.clf = MLPClassifier()
 
         self.status_label.config(text=f"Current Model: {type(self.clf).__name__}")
 
