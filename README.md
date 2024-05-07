@@ -27,8 +27,8 @@ To get started with Drawing Classifier, follow these steps:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/aapoorvv/drawing_classifier_ml.git
-   cd drawing_classifier_ml
+   git clone https://github.com/aapoorvv/SketchSense
+   cd SketchSense
 
 2. Install the required dependencies:
    ```bash
