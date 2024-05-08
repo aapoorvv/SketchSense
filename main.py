@@ -19,6 +19,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.neural_network import MLPClassifier
+from sklearn.ensemble import AdaBoostClassifier
 
 
 from sys import platform
@@ -207,7 +208,7 @@ class DrawingClassifier:
         img_list = img_list.reshape(self.class1_counter - 1 + self.class2_counter - 1 + self.class3_counter - 1, 2500)
 
         self.clf.fit(img_list, class_list)
-        tkinter.messagebox.showinfo("Drawing Classifier", "Model successfully trained!", parent=self.root)
+        tkinter.messagebox.showinfo("SketchSense", "Model successfully trained!", parent=self.root)
 
     def predict(self):
         self.image1.save("temp.png")
@@ -219,11 +220,11 @@ class DrawingClassifier:
         img = img.reshape(2500)
         prediction = self.clf.predict([img])
         if prediction[0] == 1:
-            tkinter.messagebox.showinfo("Drawing Classifier", f"The drawing is probably a {self.class1}", parent=self.root)
+            tkinter.messagebox.showinfo("SketchSense", f"The drawing is probably a {self.class1}", parent=self.root)
         elif prediction[0] == 2:
-            tkinter.messagebox.showinfo("Drawing Classifier", f"The drawing is probably a {self.class2}", parent=self.root)
+            tkinter.messagebox.showinfo("SketchSense", f"The drawing is probably a {self.class2}", parent=self.root)
         elif prediction[0] == 3:
-            tkinter.messagebox.showinfo("Drawing Classifier", f"The drawing is probably a {self.class3}", parent=self.root)
+            tkinter.messagebox.showinfo("SketchSense", f"The drawing is probably a {self.class3}", parent=self.root)
 
     def rotate_model(self):
         if isinstance(self.clf, MLPClassifier):
@@ -235,8 +236,8 @@ class DrawingClassifier:
         elif isinstance(self.clf, DecisionTreeClassifier):
             self.clf = RandomForestClassifier()
         elif isinstance(self.clf, RandomForestClassifier):
-            self.clf = GaussianNB()
-        elif isinstance(self.clf, GaussianNB):
+            self.clf = AdaBoostClassifier()
+        elif isinstance(self.clf, AdaBoostClassifier):
             self.clf = LinearSVC()
         elif isinstance(self.clf, LinearSVC):
             self.clf = MLPClassifier()
@@ -247,20 +248,20 @@ class DrawingClassifier:
         file_path = filedialog.asksaveasfilename(defaultextension="pickle")
         with open(file_path, "wb") as f:
             pickle.dump(self.clf, f)
-        tkinter.messagebox.showinfo("Drawing Classifier", "Model successfully saved!", parent=self.root)
+        tkinter.messagebox.showinfo("SketchSense", "Model successfully saved!", parent=self.root)
 
     def load_model(self):
         file_path = filedialog.askopenfilename()
         with open(file_path, "rb") as f:
             self.clf = pickle.load(f)
-        tkinter.messagebox.showinfo("Drawing Classifier", "Model successfully loaded!", parent=self.root)
+        tkinter.messagebox.showinfo("SketchSense", "Model successfully loaded!", parent=self.root)
 
     def save_everything(self):
         data = {"c1": self.class1, "c2": self.class2, "c3": self.class3, "c1c": self.class1_counter,
                 "c2c": self.class2_counter, "c3c": self.class3_counter, "clf": self.clf, "pname": self.proj_name}
         with open(f"{self.proj_name}/{self.proj_name}_data.pickle", "wb") as f:
             pickle.dump(data, f)
-        tkinter.messagebox.showinfo("Drawing Classifier", "Project successfully saved!", parent=self.root)
+        tkinter.messagebox.showinfo("SketchSense", "Project successfully saved!", parent=self.root)
 
     def on_closing(self):
         answer = tkinter.messagebox.askyesnocancel("Quit?", "Do you want to save your work?", parent=self.root)
